@@ -4,7 +4,7 @@ def statistics_calculation_output(y):
     median_df = round(y.median(),2)
     mean_df = round(y.mean(),2)
     max_df = round(y.max(),2)
-    range_max_min_df = round(max_df-min_df,2)
+    range_max_min_df = round(y.max()-y.min(),2)
 
     std_df = round(y.std(),2)
     q1_df = round(y.quantile(0.25),2)
