@@ -9,7 +9,6 @@ import pandas as pd
 
 filename = ""
 df = None
-x_columns = ["-"]
 y_columns = ["-"]
 result_statistics = {"Min":None,"Median":None,"Mean":None,"Max":None,"Range":None,
                      "Standard Deviation":None,"Quartile 1":None,"Quartile 2":None,"Quartile 3":None,"Amount":None}
@@ -23,7 +22,7 @@ def file_import():
         upload_file_button.config(state="active")
 
 def file_upload():
-    global df,x_columns,y_columns
+    global df,y_columns
 
     try:
         df = pd.read_csv(f'{filename}')
@@ -37,19 +36,13 @@ def file_upload():
 
     columns_name = list(df.columns)   
 
-    x_columns = columns_name.copy()
     y_columns = columns_name.copy()
 
-    xaxis_columns_option_menu['menu'].delete(0,"end")
     yaxis_columns_option_menu['menu'].delete(0,"end")
-
-    for column in x_columns:
-        xaxis_columns_option_menu['menu'].add_command(label=column,command=tk._setit(option_x_axis,column))
 
     for column in y_columns:
         yaxis_columns_option_menu['menu'].add_command(label=column,command=tk._setit(option_y_axis,column))
 
-    option_x_axis.set(x_columns[0])
     option_y_axis.set(y_columns[0])
 
 def file_calculation():
@@ -141,7 +134,6 @@ def reset_process():
 
     filename = ""
     df = None
-    x_columns = ["-"]
     y_columns = ["-"]
     result_statistics = {"Min":None,"Median":None,"Mean":None,"Max":None,"Range":None,
                          "Standard Deviation":None,"Quartile 1":None,"Quartile 2":None,"Quartile 3":None,"Amount":None}
@@ -165,7 +157,6 @@ def reset_process():
     save_button.config(state="disabled")
     reset_button.config(state="disabled")
 
-    option_x_axis.set("Select X Variable")
     option_y_axis.set("Select Y Variable")
 
 #Graphical User Interface
@@ -192,14 +183,9 @@ upload_file_button.grid(row=2,column=9,padx=5,pady=5)
 select_columns_label = tk.Label(main_window,text = "Column",font=("Segoe UI",15))
 select_columns_label.grid(row=3,column=0,padx=5,pady=5)
 
-option_x_axis = tk.StringVar(main_window)
 option_y_axis = tk.StringVar(main_window)
 
-option_x_axis.set("Select X Variable")
 option_y_axis.set("Select Y Variable")
-
-xaxis_columns_option_menu = tk.OptionMenu(main_window,option_x_axis,*x_columns)
-xaxis_columns_option_menu.grid(row=3,column=1,padx=5,pady=5)
 
 yaxis_columns_option_menu = tk.OptionMenu(main_window,option_y_axis,*y_columns)
 yaxis_columns_option_menu.grid(row=3,column=2,padx=5,pady=5)
