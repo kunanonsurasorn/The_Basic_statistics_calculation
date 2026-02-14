@@ -10,14 +10,16 @@ import pandas as pd
 filename = ""
 df = None
 y_columns = ["-"]
-result_statistics = {"Min":None,"Median":None,"Mean":None,"Max":None,"Range":None,
+result_statistics = {"Column":None,"Min":None,"Median":None,"Mean":None,"Max":None,"Range":None,
                      "Standard Deviation":None,"Quartile 1":None,"Quartile 2":None,"Quartile 3":None,"Amount":None}
 
 #Function
 
 def file_import():
     global filename
+
     filename = filedialog.askopenfilename(title="Import CSV file",filetypes=[("CSV files","*.csv")])
+
     if filename:
         upload_file_button.config(state="active")
 
@@ -48,6 +50,7 @@ def file_upload():
 def file_calculation():
     global min_df,median_df,mean_df,max_df,range_max_min_df
     global std_df,q1_df,q2_df,q3_df,amount_df
+
     if df is None:
         messagebox.showwarning("Data Error","No file uploaded")
         return
@@ -58,6 +61,7 @@ def file_calculation():
     
     try:
         y = pd.to_numeric(df[option_y_axis.get()],errors='coerce')
+        result_statistics.update({"Column":str(option_y_axis.get())})
         y = y.dropna()
 
     except Exception as e:
@@ -130,12 +134,10 @@ def saving_file_statistics():
 
 def reset_process():
 
-    global filename,df,x_columns,y_columns,result_statistics
-
+    global filename,df,y_columns,result_statistics
     filename = ""
     df = None
-    y_columns = ["-"]
-    result_statistics = {"Min":None,"Median":None,"Mean":None,"Max":None,"Range":None,
+    result_statistics = {"Column":None,"Min":None,"Median":None,"Mean":None,"Max":None,"Range":None,
                          "Standard Deviation":None,"Quartile 1":None,"Quartile 2":None,"Quartile 3":None,"Amount":None}
     
     upload_file_path_label.configure(text="File Path")
@@ -157,7 +159,12 @@ def reset_process():
     save_button.config(state="disabled")
     reset_button.config(state="disabled")
 
-    option_y_axis.set("Select Y Variable")
+    yaxis_columns_option_menu['menu'].delete(0,"end")
+    y_columns = ["-"]
+    for column in y_columns:
+        yaxis_columns_option_menu['menu'].add_command(label=column,command=tk._setit(option_y_axis,column))
+    option_y_axis.set("Select Column")
+
 
 #Graphical User Interface
 
@@ -185,10 +192,10 @@ select_columns_label.grid(row=3,column=0,padx=5,pady=5)
 
 option_y_axis = tk.StringVar(main_window)
 
-option_y_axis.set("Select Y Variable")
+option_y_axis.set("Select Column")
 
 yaxis_columns_option_menu = tk.OptionMenu(main_window,option_y_axis,*y_columns)
-yaxis_columns_option_menu.grid(row=3,column=2,padx=5,pady=5)
+yaxis_columns_option_menu.grid(row=3,column=1,padx=5,pady=5)
 
 statistics_label = tk.Label(main_window,text = "Statistics",font=("Segoe UI",15))
 statistics_label.grid(row=4,column=0,padx=5,pady=5)
