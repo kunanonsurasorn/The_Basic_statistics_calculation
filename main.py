@@ -15,6 +15,8 @@ result_statistics = {"Column":None,"Min":None,"Median":None,"Mean":None,"Max":No
 
 #Function
 
+#ฟังก์ชันสำหรับการนำเข้าไฟล์ CSV
+
 def file_import():
     global filename
 
@@ -22,6 +24,8 @@ def file_import():
 
     if filename:
         upload_file_button.config(state="active")
+
+#ฟังก์ชันสำหรับอัพโหลดไฟล์เข้ามาและสร้างตัวเลือกคอลัมน์ที่ผู้ใช้ต้องสำหรับนำข้อมูลของคอลัมน์ไปคำนวณทางสถิติ
 
 def file_upload():
     global df,y_columns
@@ -47,6 +51,8 @@ def file_upload():
 
     option_y_axis.set(y_columns[0])
 
+#ฟังก์ชันสำหรับการคำนวณทางสถิติโดยค่าในคอลัมน์ที่เลือกไว้จะเอาไปคำนวณในไฟล์ statistics_calculation.py
+
 def file_calculation():
     global min_df,median_df,mean_df,max_df,range_max_min_df
     global std_df,q1_df,q2_df,q3_df,amount_df
@@ -60,9 +66,9 @@ def file_calculation():
         return
     
     try:
-        y = pd.to_numeric(df[option_y_axis.get()],errors='coerce')
+        y = pd.to_numeric(df[option_y_axis.get()],errors='coerce') #แปลงค่าที่เป็นตัวเลขแต่เก็บในรูปแบบ str ให้เป็นชนิดตัวแปรแบบตัวเลข หรือ แปลงค่าข้อความที่เป็นตัวอักษรให้เป็น NaN
         result_statistics.update({"Column":str(option_y_axis.get())})
-        y = y.dropna()
+        y = y.dropna() #เอาแถวที่ไม่ได้มีการเก็บค่าไว้ออกจากคอลัมน์ที่ถูกเลือกไว้
 
     except Exception as e:
         messagebox.showerror("Column Error",str(e))
@@ -84,6 +90,8 @@ def file_calculation():
 
     save_button.config(state="active")
 
+#ฟังก์ชันสำหรับแสดงผลทางสถิติใน GUI
+
 def show_result_statistics():
 
     min_output.config(text=min_df)
@@ -98,6 +106,8 @@ def show_result_statistics():
     quartile_3_output.config(text=q3_df)
     amount_output.config(text=amount_df)
 
+#ฟังก์ชันสำหรับนำผลลัพธ์ทางสถิติไปไว้ที่ dictionary ชื่อ result_statistics โดยรวมกับข้อมูลชื่อคอลัมน์เพื่อส่งออกไฟล์ CSV
+
 def update_result_statistics():
 
     result_statistics.update({"Min":float(min_df)})
@@ -111,6 +121,8 @@ def update_result_statistics():
     result_statistics.update({"Quartile 2":float(q2_df)})
     result_statistics.update({"Quartile 3":float(q3_df)})
     result_statistics.update({"Amount":int(amount_df)})
+
+#ฟังก์ชันสำหรับการบันทึกข้อมูลซึ่งไปทำการบันทึกข้อมูลเป็นไฟล์ CSV ที่ csv_file_saving.py และ ผู้ใช้จะได้ไฟล์ CSV แสดงชื่อคอลัมน์ที่ผู้ใช้เลือกและค่าทางสถิติ
 
 def saving_file_statistics():
 
@@ -131,6 +143,8 @@ def saving_file_statistics():
         return
 
     reset_button.config(state="active")
+
+#ฟังก์ชันสำหรับกดปุ่ม Reset เพื่อเปลี่ยนข้อมูลให้ว่างเปล่าเหมือนช่วงเปิดโปรแกรมและก่อนนำเข้าข้อมูล
 
 def reset_process():
 
@@ -164,7 +178,6 @@ def reset_process():
     for column in y_columns:
         yaxis_columns_option_menu['menu'].add_command(label=column,command=tk._setit(option_y_axis,column))
     option_y_axis.set("Select Column")
-
 
 #Graphical User Interface
 
