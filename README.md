@@ -1,6 +1,10 @@
 # The_Basic_statistics_calculation
 โปรเจคนี้จัดทำขึ้นเพื่อพัฒนาโปรแกรมการคำนวณทางสถิติเบื้องต้นสำหรับชุดข้อมูลในรูปแบบ CSV ที่มีช้อมูลเป็นจำนวนมาก การใช้โปรแกรมนี้จะช่วยให้ผู้ใช้สามารถทราบข้อมูลทางสถิติเบื้องต้นของข้อมูลที่ผู้ใช้สนในใจเช่น ค่าต่ำสุด ค่ามัธยฐาน ค่าเฉลี่ย ค่าสูงสุด พิสัย ค่าเบี่ยงเบนมาตรฐาน ค่าควอร์ไทล์ และ จำนวนข้อมูล
 
+![project_gui](https://github.com/kunanonsurasorn/The_Basic_statistics_calculation/blob/main/project_gui.jpg)
+
+![project_gui2](https://github.com/kunanonsurasorn/The_Basic_statistics_calculation/blob/main/project_gui2.jpg)
+
 ## 1. Library ที่ใช้ในการพัฒนา
 
     1.1 Tkinter
