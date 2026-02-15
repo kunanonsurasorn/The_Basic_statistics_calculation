@@ -45,8 +45,11 @@
 
 ## 4. ที่มาของชุดข้อมูล
 
-    https://kosis.kr/eng/
-    https://www.scb.se/en/
+    4.1 เว็บไซต์ด้านสถิติประเทศเกาหลีใต้ 
+            https://kosis.kr/eng/
+    
+    4.2 เว็บไซต์ด้านสถิติประเทศสวีเดน 
+            https://www.scb.se/en/
 
 ![project_gui3](https://github.com/kunanonsurasorn/The_Basic_statistics_calculation/blob/main/project_gui3.jpg)
 
