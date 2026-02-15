@@ -43,6 +43,11 @@
 
     โปรเจคนี้สามารถนำ matplotlib มาใช้สำหรับการดูความสัมพันธ์ระหว่างตัวแปร x และ ตัวแปร y ในรูปแบบกราฟ
 
+## 4. ที่มาของชุดข้อมูล
+
+    https://kosis.kr/eng/
+    https://www.scb.se/en/
+
 ![project_gui3](https://github.com/kunanonsurasorn/The_Basic_statistics_calculation/blob/main/project_gui3.jpg)
 
 ![project_gui4](https://github.com/kunanonsurasorn/The_Basic_statistics_calculation/blob/main/project_gui4.jpg)
